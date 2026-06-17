@@ -8,13 +8,14 @@ on:
   workflow_dispatch:
     inputs:
       DEPLOYMENT_ENVIRONMENT:
-        description: 'Deployment environment'
+        description: "Deployment environment"
         required: true
         type: choice
         options:
-        - preview
-        - production
-        default: 'production'
+          - preview
+          - production
+          - Cloudflare
+        default: "Cloudflare"
 
 env:
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -38,7 +39,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          cache: 'yarn'
+          cache: "yarn"
       - name: Setup
         run: yarn setup:production
       - name: Deploy to Cloudflare Pages [${{ inputs.DEPLOYMENT_ENVIRONMENT }}]
