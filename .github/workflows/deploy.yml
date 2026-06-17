@@ -14,8 +14,7 @@ on:
         options:
           - preview
           - production
-          - cloudflare
-        default: "cloudflare"
+        default: "production"
 
 env:
   CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
