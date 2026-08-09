@@ -60,6 +60,7 @@
       {{/items.0.attachments}}
       {{/items.0._microfeed.is_image}}
     </div>
+    {{#items.0.attachments}}
     <div>
       {{#_microfeed.subscribe_methods.length}}
       <div class="text-sm mt-4 mb-2">
@@ -77,10 +78,16 @@
         {{/_microfeed.subscribe_methods}}
       </div>
     </div>
+    {{/items.0.attachments}}
   </section>
 
   <section>
+    {{#items.0.attachments}}
     <h2 class="border-b">About</h2>
+    {{/items.0.attachments}}
+    {{^items.0.attachments}}
+    <h2>About</h2>
+    {{/items.0.attachments}}
     <div>
       {{#items.0.image}}
       <div class="mb-4">
