@@ -1,8 +1,8 @@
 name: Deploy to Cloudflare Pages
 
 on:
-  # push:
-  #  branches: ["dev-v1"]
+  push:
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,13 +24,13 @@ env:
   R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
   R2_PUBLIC_BUCKET: ${{ secrets.R2_PUBLIC_BUCKET || secrets.CLOUDFLARE_PROJECT_NAME }}
   D1_DATABASE_NAME: ${{ secrets.D1_DATABASE_NAME }}
-  DEPLOYMENT_ENVIRONMENT: ${{ inputs.DEPLOYMENT_ENVIRONMENT }}
+  DEPLOYMENT_ENVIRONMENT: ${{ inputs.DEPLOYMENT_ENVIRONMENT || 'production' }}
   PRODUCTION_BRANCH: main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.event.inputs.DEPLOYMENT_ENVIRONMENT }}
+      name: ${{ inputs.DEPLOYMENT_ENVIRONMENT || 'production' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,5 +41,5 @@ jobs:
           cache: "yarn"
       - name: Setup
         run: yarn setup:production
-      - name: Deploy to Cloudflare Pages [${{ inputs.DEPLOYMENT_ENVIRONMENT }}]
+      - name: Deploy to Cloudflare Pages [${{ inputs.DEPLOYMENT_ENVIRONMENT || 'production' }}]
         run: yarn deploy:github

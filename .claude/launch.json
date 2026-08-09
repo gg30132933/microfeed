@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["dev"],
+      "port": 8788,
+      "url": "http://127.0.0.1:8788"
+    }
+  ]
+}
