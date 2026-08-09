@@ -1,1 +1,19 @@
 <!-- right after <body> tag -->
+<nav class="site-nav">
+  <a href="/" class="brand">
+    {{#icon}}
+    <img src="{{icon}}" alt="{{title}}" loading="lazy"/>
+    {{/icon}}
+    <span>{{title}}</span>
+  </a>
+  {{#_microfeed.subscribe_methods.length}}
+  <div class="nav-subscribe">
+    {{#_microfeed.subscribe_methods}}
+    <a href="{{url}}" class="pill">
+      <img src="{{image}}" alt="{{name}}" loading="lazy"/>
+      <span class="hide-mobile">{{name}}</span>
+    </a>
+    {{/_microfeed.subscribe_methods}}
+  </div>
+  {{/_microfeed.subscribe_methods.length}}
+</nav>
