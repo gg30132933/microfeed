@@ -250,9 +250,14 @@ export class WebResponseBuilder extends ResponseBuilder {
     }
     const fromReact = renderReactToHtml(component);
     const newRes = new Response(fromReact, res);
+    // Item pages with no media attachment are pure HTML/content items (e.g. an
+    // embedded standalone HTML page) — they own their own layout, so skip the
+    // site's Subscribe-page footer/body-end chrome for them.
+    const soleItem = this.forOneItem && this.jsonData.items && this.jsonData.items[0];
+    const hideBodyEnd = !!(soleItem && !soleItem.attachments);
     return new HTMLRewriter()
       .on('head', new CodeInjector(this.settings, theme, sharedTheme))
-      .on('body', new CodeInjector(this.settings, theme, sharedTheme))
+      .on('body', new CodeInjector(this.settings, theme, sharedTheme, hideBodyEnd))
       .transform(newRes);
   }
 }
