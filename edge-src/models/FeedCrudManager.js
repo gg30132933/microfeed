@@ -60,6 +60,10 @@ export default class FeedCrudManager {
       internalSchema.image = removeHostFromUrl(item.image);
     }
 
+    if (Array.isArray(item.tags)) {
+      internalSchema.tags = item.tags;
+    }
+
     if (item.date_published_ms) {
       internalSchema.pubDateMs = item.date_published_ms;
     }
