@@ -6,6 +6,17 @@
     {{/icon}}
     <span>{{title}}</span>
   </a>
+
+  {{#_microfeed.nav_items.length}}
+  <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox"/>
+  <label for="nav-toggle" class="nav-toggle-btn">&#9776;</label>
+  <div class="nav-links">
+    {{#_microfeed.nav_items}}
+    <a href="{{url}}">{{label}}</a>
+    {{/_microfeed.nav_items}}
+  </div>
+  {{/_microfeed.nav_items.length}}
+
   {{#_microfeed.subscribe_methods.length}}
   <div class="nav-subscribe">
     {{#_microfeed.subscribe_methods}}
