@@ -287,6 +287,15 @@ export default class EditItemApp extends React.Component {
                   />
                   <div className="text-muted-color text-xs" dangerouslySetInnerHTML={{__html: ITEM_STATUSES_DICT[status].description}} />
                 </div>
+                <AdminCreatableSelect
+                  label="Tags"
+                  value={(item.tags || []).map((t) => ({label: t, value: t}))}
+                  options={[]}
+                  extraParams={{isMulti: true}}
+                  onChange={(selected) => {
+                    this.onUpdateItemMeta({tags: (selected || []).map((o) => o.value)});
+                  }}
+                />
               </div>
             </div>
             <div className="mt-8 pt-8 border-t">
