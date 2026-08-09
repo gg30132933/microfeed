@@ -1,14 +1,14 @@
 <main>
   <section class="mb-4">
-    <a href="/">
-      <div class="icon-arrow-left">{{items.0.title}}</div>
+    <a href="/" class="pill">
+      <span class="icon-arrow-left"></span> Back
     </a>
   </section>
 
   <section>
     {{#items.0.attachments}}
     <h1>{{items.0.title}}</h1>
-    <div class="mb-4 text-sm">
+    <div class="item-meta mb-4">
       <time>{{items.0._microfeed.date_published_short}}</time>
       &middot;
       <a href="{{items.0._microfeed.json_url}}" target="_blank">json</a>
@@ -17,7 +17,7 @@
     </div>
     {{/items.0.attachments}}
 
-    <div>
+    <div class="media-card">
       {{#items.0._microfeed.is_audio}}
       <div class="text-sm mb-4">
         Listen:
@@ -57,11 +57,12 @@
       {{#items.0._microfeed.is_image}}
       {{#items.0.attachments}}
       <a href="{{url}}" target="_blank">
-        <img src="{{url}}" width="80%" loading="lazy" />
+        <img src="{{url}}" width="80%" loading="lazy"/>
       </a>
       {{/items.0.attachments}}
       {{/items.0._microfeed.is_image}}
     </div>
+
     {{#items.0.attachments}}
     <div>
       {{#_microfeed.subscribe_methods.length}}
@@ -71,11 +72,9 @@
       {{/_microfeed.subscribe_methods.length}}
       <div class="flex flex-wrap">
         {{#_microfeed.subscribe_methods}}
-        <a href="{{url}}" class="mr-4 mb-2">
-          <div class="flex items-center">
-            <img src="{{image}}" class="img-sm flex-none" alt="{{name}}" loading="lazy"/>
-            <div class="flex-1 ml-1 text-sm hide-mobile">{{name}}</div>
-          </div>
+        <a href="{{url}}" class="pill mr-4 mb-2">
+          <img src="{{image}}" alt="{{name}}" loading="lazy"/>
+          <span class="hide-mobile">{{name}}</span>
         </a>
         {{/_microfeed.subscribe_methods}}
       </div>
@@ -85,13 +84,13 @@
 
   <section>
     {{#items.0.attachments}}
-    <h2 class="border-b">About</h2>
+    <h2>About</h2>
     {{/items.0.attachments}}
     <div>
       {{#items.0.image}}
       <div class="mb-4">
         <a href="{{items.0.image}}" target="_blank">
-          <img src={{items.0.image}} width="250" height="250" loading="lazy"/>
+          <img src="{{items.0.image}}" width="250" height="250" loading="lazy"/>
         </a>
       </div>
       {{/items.0.image}}
