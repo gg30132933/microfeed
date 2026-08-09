@@ -1,88 +1,61 @@
 <main>
-  <section>
+  <section class="hero">
     <h1>{{title}}</h1>
-    <div class="flex">
-      {{#icon}}
-      <div class="mr-4">
-        <a href="{{icon}}" target="_blank">
-          <img alt="{{title}}" src="{{icon}}" class="img-lg" loading="lazy"/>
-        </a>
-      </div>
-      {{/icon}}
-      <div>
-        {{#authors}}
-        <div class="one-line">
-          <span title="{{name}}">{{name}}</span>
-        </div>
-        {{/authors}}
-        <div>
-          {{#_microfeed.subscribe_methods.length}}
-          <div class="text-sm mt-4 mb-2">
-            Subscribe:
-          </div>
-          {{/_microfeed.subscribe_methods.length}}
-          <div class="flex flex-wrap">
-            {{#_microfeed.subscribe_methods}}
-            <a href="{{url}}" class="mr-4 mb-2">
-              <div class="flex items-center">
-                <img src="{{image}}" class="img-sm flex-none" alt="{{name}}" loading="lazy"/>
-                <div class="flex-1 ml-1 text-sm hide-mobile">{{name}}</div>
-              </div>
-            </a>
-            {{/_microfeed.subscribe_methods}}
-          </div>
-        </div>
-      </div>
+    {{#description}}
+    <div class="description">{{{description}}}</div>
+    {{/description}}
+
+    {{#_microfeed.subscribe_methods.length}}
+    <div class="subscribe-links">
+      {{#_microfeed.subscribe_methods}}
+      <a href="{{url}}" class="pill">
+        <img src="{{image}}" alt="{{name}}" loading="lazy"/>
+        <span class="hide-mobile">{{name}}</span>
+      </a>
+      {{/_microfeed.subscribe_methods}}
     </div>
+    {{/_microfeed.subscribe_methods.length}}
   </section>
 
-  {{#description}}
   <section>
-    <h2 class="border-b">About</h2>
-    <div>{{{description}}}</div>
-  </section>
-  {{/description}}
-
-  <section>
-    <h2 class="border-b">
-      Latest
-    </h2>
+    <h2>Latest</h2>
 
     <div>
       {{^items.length}}
-      No items.
+      <p>No items.</p>
       {{/items.length}}
 
       {{#items}}
-      <div class="mb-4">
-        <a href="{{_microfeed.web_url}}" class="mb-1">
-          {{title}}
-          <span class="icon-arrow-right"></span>
-        </a>
-        <div class="text-sm">
-          {{_microfeed.date_published_short}}
-
-          {{#_microfeed.duration_hhmmss}}
-          &middot;
-          <i>{{_microfeed.duration_hhmmss}}</i>
-          {{/_microfeed.duration_hhmmss}}
+      <a href="{{_microfeed.web_url}}" class="item-card">
+        {{#image}}
+        <img src="{{image}}" alt="{{title}}" loading="lazy"/>
+        {{/image}}
+        <div>
+          <span class="item-title">{{title}}</span>
+          <div class="item-meta">
+            {{_microfeed.date_published_short}}
+            {{#_microfeed.duration_hhmmss}}
+            &middot;
+            <i>{{_microfeed.duration_hhmmss}}</i>
+            {{/_microfeed.duration_hhmmss}}
+          </div>
         </div>
-      </div>
+      </a>
       {{/items}}
     </div>
 
     <div class="flex justify-center mt-4">
       {{#_microfeed.items_prev_cursor}}
       <div class="px-2">
-        <a href="?prev_cursor={{_microfeed.items_prev_cursor}}&sort={{_microfeed.items_sort_order}}"><span
-          class="icon-arrow-left"> Prev</span></a>
+        <a href="?prev_cursor={{_microfeed.items_prev_cursor}}&sort={{_microfeed.items_sort_order}}" class="pill">
+          <span class="icon-arrow-left"></span> Prev</a>
       </div>
       {{/_microfeed.items_prev_cursor}}
 
       {{#_microfeed.items_next_cursor}}
       <div class="px-2">
-        <a href="?next_cursor={{_microfeed.items_next_cursor}}&sort={{_microfeed.items_sort_order}}">Next <span
-          class="icon-arrow-right"></span></a>
+        <a href="?next_cursor={{_microfeed.items_next_cursor}}&sort={{_microfeed.items_sort_order}}" class="pill">Next
+          <span class="icon-arrow-right"></span></a>
       </div>
       {{/_microfeed.items_next_cursor}}
     </div>
