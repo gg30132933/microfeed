@@ -237,6 +237,12 @@ export default class FeedPublicJsonBuilder {
 
     newItem['content_html'] = item.description || '';
     newItem['content_text'] = item.descriptionText || '';
+    if (item.descriptionText) {
+      newItem['excerpt'] = truncateString(item.descriptionText, 120);
+    }
+    if (Array.isArray(item.tags) && item.tags.length > 0) {
+      newItem['tags'] = item.tags;
+    }
 
     if (item.image) {
       newItem['image'] = item.image;
