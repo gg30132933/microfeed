@@ -121,6 +121,8 @@ export default class FeedPublicJsonBuilder {
         microfeedExtra['categories'].push(cat);
       }
     });
+    const navItems = channel.navItems || [];
+    microfeedExtra['nav_items'] = navItems.filter((n) => n.label && n.url);
     if (!subscribeMethods.methods) {
       microfeedExtra['subscribe_methods'] = '';
     } else {
