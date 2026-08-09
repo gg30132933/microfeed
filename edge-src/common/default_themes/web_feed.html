@@ -1,23 +1,20 @@
 <main>
   <section class="hero"{{#icon}} style="background-image: linear-gradient(rgba(10,10,15,0.72), rgba(10,10,15,0.72)), url('{{icon}}');"{{/icon}}>
-    <h1>{{title}}</h1>
-    {{#description}}
-    <div class="description">{{{description}}}</div>
-    {{/description}}
-
-    {{#_microfeed.subscribe_methods.length}}
-    <div class="subscribe-links">
-      {{#_microfeed.subscribe_methods}}
-      <a href="{{url}}" class="pill">
-        <img src="{{image}}" alt="{{name}}" loading="lazy"/>
-        <span class="hide-mobile">{{name}}</span>
-      </a>
-      {{/_microfeed.subscribe_methods}}
+    <div class="hero-inner">
+      {{#description}}
+      <div class="description">{{{description}}}</div>
+      {{/description}}
     </div>
-    {{/_microfeed.subscribe_methods.length}}
   </section>
 
   <section>
+    {{#_microfeed.current_tag}}
+    <div class="tag-filter-banner">
+      篩選標籤：<strong>{{_microfeed.current_tag}}</strong>
+      <a href="/">✕ 清除篩選</a>
+    </div>
+    {{/_microfeed.current_tag}}
+
     <h2>Latest</h2>
 
     <div>
@@ -26,12 +23,12 @@
       {{/items.length}}
 
       {{#items}}
-      <a href="{{_microfeed.web_url}}" class="item-card">
+      <div class="item-card">
         {{#image}}
         <img src="{{image}}" alt="{{title}}" loading="lazy"/>
         {{/image}}
         <div>
-          <span class="item-title">{{title}}</span>
+          <a href="{{_microfeed.web_url}}" class="item-title">{{title}}</a>
           <div class="item-meta">
             {{_microfeed.date_published_short}}
             {{#_microfeed.duration_hhmmss}}
@@ -39,8 +36,18 @@
             <i>{{_microfeed.duration_hhmmss}}</i>
             {{/_microfeed.duration_hhmmss}}
           </div>
+          {{#excerpt}}
+          <p class="item-excerpt">{{excerpt}}</p>
+          {{/excerpt}}
+          {{#tags.length}}
+          <div class="item-tags">
+            {{#tags}}
+            <a href="/?tag={{.}}" class="tag-pill">{{.}}</a>
+            {{/tags}}
+          </div>
+          {{/tags.length}}
         </div>
-      </a>
+      </div>
       {{/items}}
     </div>
 
