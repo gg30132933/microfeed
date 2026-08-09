@@ -181,34 +181,19 @@
     text-align: center;
     padding: 5em 1.25em 4em;
     margin: 0 0 3em;
+    /* breakout to full viewport width regardless of the parent's max-width */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 
-  .hero h1 {
-    color: #fff;
-    font-size: 2.6em;
+  .hero-inner {
+    max-width: 42em;
+    margin: 0 auto;
   }
 
   .hero .description {
-    max-width: 42em;
-    margin: 0 auto 1.6em;
     color: #cfcfcf;
-  }
-
-  .hero .subscribe-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6em;
-  }
-
-  .hero .pill {
-    border-color: rgba(255, 255, 255, 0.25);
-    color: #fff;
-  }
-
-  .hero .pill:hover {
-    border-color: var(--accent);
-    color: var(--accent);
   }
 
   /* Items */
