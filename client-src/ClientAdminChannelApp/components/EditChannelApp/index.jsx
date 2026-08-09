@@ -205,6 +205,12 @@ export default class EditChannelApp extends React.Component {
               />
             </div>
           </div>
+          <div className="lh-page-card">
+            <NavItemsEditor
+              navItems={channel.navItems || []}
+              onChange={(navItems) => this.onUpdateChannelMeta('navItems', navItems)}
+            />
+          </div>
           <details className="lh-page-card">
             <summary className="m-page-summary">
               Podcast-specific fields
