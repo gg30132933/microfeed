@@ -22,6 +22,7 @@ class ResponseBuilder {
     this.settings = this.content.settings || {};
     const queryKwargs = this.fetchItemsObj.queryKwargs || {};
     const forOneItem = !!queryKwargs.id;
+    this.forOneItem = forOneItem;
     this.jsonData = await this.feed.getPublicJsonData(this.content, forOneItem);
   }
 
