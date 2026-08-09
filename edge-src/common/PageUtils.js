@@ -200,10 +200,11 @@ export class SitemapResponseBuilder extends ResponseBuilder {
 }
 
 class CodeInjector {
-  constructor(settings, theme, sharedTheme) {
+  constructor(settings, theme, sharedTheme, hideBodyEnd = false) {
     this.settings = settings;
     this.theme = theme;
     this.sharedTheme = sharedTheme;
+    this.hideBodyEnd = hideBodyEnd;
   }
   element(element) {
     if (!this.settings) {
@@ -225,9 +226,11 @@ class CodeInjector {
       element.prepend(this.theme.getWebBodyStart().html, {html: true});
       element.prepend(this.sharedTheme.getWebBodyStart().html || '', {html: true});
 
-      element.append(this.sharedTheme.getWebBodyEnd().html || '', {html: true});
-      const {html} = this.theme.getWebBodyEnd();
-      element.append(html, {html: true});
+      if (!this.hideBodyEnd) {
+        element.append(this.sharedTheme.getWebBodyEnd().html || '', {html: true});
+        const {html} = this.theme.getWebBodyEnd();
+        element.append(html, {html: true});
+      }
     }
   }
 }
