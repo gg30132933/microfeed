@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["yarn", "dev"],
       "port": 8788,
       "url": "http://127.0.0.1:8788"
     }
