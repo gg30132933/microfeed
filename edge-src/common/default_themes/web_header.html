@@ -34,6 +34,12 @@
     margin-bottom: 2em;
   }
 
+  /* Item content can embed its own <style> with broad `section { ... }` rules (e.g. a
+     pasted full page). Pin our own chrome sections' padding so they don't inherit it. */
+  section.mb-4 {
+    padding: 0;
+  }
+
   h1, h2, h3 {
     font-family: "Noto Serif TC", "Songti TC", Georgia, serif;
     font-weight: 700;
