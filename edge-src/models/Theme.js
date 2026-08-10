@@ -116,11 +116,19 @@ export default class Theme {
 
   getWebItem(item) {
     const tmpl = this.getWebItemTmpl();
+    // Item content is an HTML fragment meant to sit inside our page shell. If someone
+    // pasted a whole standalone document instead, unwrap it to a fragment so it doesn't
+    // get embedded as literal <head>/<body> text (see extractHtmlBodyFragment).
+    const itemForRender = {
+      ...item,
+      content_html: extractHtmlBodyFragment(item.content_html),
+    };
     const html = Mustache.render(tmpl, {
       ...this.jsonData,
+      items: (this.jsonData.items || []).map((it, idx) => idx === 0 ? itemForRender : it),
 
       // TODO: Remove "item". We don't need this "item" field any more. Use "items.0" instead.
-      item,
+      item: itemForRender,
     });
     return {
       html,
