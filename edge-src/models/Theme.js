@@ -1,5 +1,6 @@
 import {CODE_TYPES, SETTINGS_CATEGORIES} from "../../common-src/Constants";
 import {CODE_FILES} from "../../common-src/Constants";
+import {extractHtmlBodyFragment} from "../../common-src/StringUtils";
 import DEFAULT_WEB_HEADER from '../common/default_themes/web_header.html';
 import DEFAULT_WEB_BODY_END from '../common/default_themes/web_body_end.html';
 import DEFAULT_WEB_BODY_START from '../common/default_themes/web_body_start.html';
