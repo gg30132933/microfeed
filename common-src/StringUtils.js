@@ -199,6 +199,36 @@ export function unescapeHtml(htmlStr) {
   return htmlStr;
 }
 
+/**
+ * Item content is meant to be an HTML fragment embedded into our own page shell.
+ * Sometimes people paste a whole standalone document instead
+ * (<!DOCTYPE html><html><head>...</head><body>...</body></html>). Left as-is, that
+ * scaffolding ends up as literal text inside our real <head>/<body>, which confuses
+ * the HTMLRewriter pass in PageUtils (it matches every <head>/<body>-looking tag in
+ * the stream, so a pasted one triggers a second, duplicate injection of the site nav)
+ * and leaves stray <title>/<meta> tags sitting in the visible body.
+ *
+ * If the string looks like a full document, unwrap it down to a fragment: drop the
+ * document/head/body scaffolding and metadata tags, but keep <style>/<link> so the
+ * pasted page's own look still applies.
+ */
+export function extractHtmlBodyFragment(html) {
+  if (!html || !/<html[\s>]/i.test(html)) {
+    return html;
+  }
+
+  const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  if (!bodyMatch) {
+    return html;
+  }
+
+  const headMatch = html.match(/<head[^>]*>([\s\S]*?)<\/head>/i);
+  const head = headMatch ? headMatch[1] : '';
+  const keepFromHead = (head.match(/<style[\s\S]*?<\/style>|<link[^>]*rel=["']?stylesheet["']?[^>]*>/gi) || []).join('\n');
+
+  return `${keepFromHead}\n${bodyMatch[1]}`.trim();
+}
+
 export function htmlToPlainText(htmlStr, options = null) {
   let convertOptions = {
     ignoreHref: true,
