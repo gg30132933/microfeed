@@ -205,11 +205,18 @@ class CodeInjector {
     this.theme = theme;
     this.sharedTheme = sharedTheme;
     this.hideBodyEnd = hideBodyEnd;
+    // A page has exactly one real <head> and <body>. HTMLRewriter matches every
+    // occurrence of the selector tag it sees in the stream though, including ones that
+    // are just literal text inside item content (e.g. a pasted <body> tag) rather than
+    // real structure — inject only on the first match so content can never trigger a
+    // second, duplicate round of site chrome.
+    this.injected = false;
   }
   element(element) {
-    if (!this.settings) {
+    if (!this.settings || this.injected) {
       return;
     }
+    this.injected = true;
 
     if (element.tagName === 'head') {
       if (this.settings.webGlobalSettings) {
