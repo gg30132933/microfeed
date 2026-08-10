@@ -5,8 +5,8 @@
     </a>
   </section>
 
+  {{#items.0.attachments}}
   <section>
-    {{#items.0.attachments}}
     <h1>{{items.0.title}}</h1>
     <div class="item-meta mb-4">
       <time>{{items.0._microfeed.date_published_short}}</time>
@@ -15,9 +15,7 @@
       &middot;
       <a href="{{items.0._microfeed.rss_url}}" target="_blank">rss</a>
     </div>
-    {{/items.0.attachments}}
 
-    {{#items.0.attachments}}
     <div class="media-card">
       {{#items.0._microfeed.is_audio}}
       <div class="text-sm mb-4">
