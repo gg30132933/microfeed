@@ -36,8 +36,13 @@
 
   /* Item content can embed its own <style> with broad `section { ... }` rules (e.g. a
      pasted full page). Pin our own chrome sections' padding so they don't inherit it. */
-  section.mb-4 {
+  section.mb-4,
+  section.item-content {
     padding: 0;
+  }
+
+  section.mb-4 {
+    margin-top: 1.5em;
   }
 
   h1, h2, h3 {
